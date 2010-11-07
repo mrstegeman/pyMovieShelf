@@ -1,0 +1,102 @@
+body, html {
+    background-color: #000;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: Verdana, serif;
+    font-size: 13px;
+}
+a:link, a:active, a:visited {
+    color: #a6940b;
+}
+a:hover {
+    color: #fff;
+}
+.outer {
+    display: table;
+    position: static;
+    width: 800px;
+    margin: auto auto;
+    height: 100%;
+}
+.middle {
+    background-color: #333;
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 0 20px #666;
+    -moz-box-shadow: 0 0 20px #666;
+    box-shadow: 0 0 20px #666;
+}
+.content {
+    padding: 10px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #000;
+    background-color: #1a1a1a;
+}
+.poster {
+    margin-top: 20px;
+    float: left;
+}
+.details {
+    margin-left: 210px;
+}
+.list {
+}
+.back {
+    padding-top: 15px;
+    text-align: center;
+}
+.tbl_details {
+    table-layout: fixed;
+    text-align: justify;
+}
+.tbl_list {
+    margin: auto auto;
+    text-align: left;
+}
+td, th {
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+.header {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+.footer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    height: 30px;
+}
+fieldset {
+    border-width: 0px;
+}
+.imdb_search {
+    margin: auto auto;
+    text-align: center;
+}
+.td_left {
+    text-align: left;
+}
+.td_right {
+    text-align: right;
+}
+.userinfo {
+    width: 800px;
+    text-align: right;
+    position: relative;
+    bottom: 40px;
+    right: 10px;
+}
+.search_form {
+    text-align: center;
+    margin: auto auto;
+}

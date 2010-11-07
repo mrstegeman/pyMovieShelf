@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head profile="http://www.w3.org/2005/10/profile">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="Content-language" content="en" />
+        <link rel="stylesheet" type="text/css" href="/media/css/pymovieshelf.css" />
+        <meta name="description" content="Python based DVD manager." />
+        <title>pyMediaShelf</title>
+    </head>
+    <body onload="document.search_form.title.focus();">
+        <div class="outer">
+            <div class="middle">
+                <div class="header">
+                    <h1>pyMovieShelf</h1>
+                    {% if user.is_authenticated %}
+                    <div class="userinfo"><a href="/admin/pymovieshelf/movie/" style="padding-right:20px">Admin</a><a href="/admin/logout/">Log out</a></div>
+                    {% else %}
+                    <div class="userinfo"><a href="/admin/">Log in</a></div>
+                    {% endif %}
+                </div>
+                <div class="content">
+                    <form class="search_form" name="search_form" action="/pymovieshelf/search/" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <label for="title">Title: </label>
+                            <input type="text" name="title" id="title" />
+                            <input type="submit" value="Search" name="submit" />
+                        </fieldset>
+                    </form>
+                    <div class="list">
+                    {% if object_list %}
+                        <table class="tbl_list">
+                            <tr>
+                                <th>Title</th>
+                                <th>Year</th>
+                            </tr>
+                        {% for object in object_list %}
+                            <tr>
+                                <td><a href="/pymovieshelf/{{ object.id }}/">{{ object.title }}</a></td>
+                                <td>{{ object.year }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% else %}
+                        <p>No movies have been added.</p>
+                    {% endif %}
+                    </div>
+                    <div class="back">
+                    {% if has_previous %}
+                    <a href="/pymovieshelf/?page={{ previous }}" style="padding-right:10px">&lt;</a>
+                    {% endif %}
+                    {{ page }}
+                    {% if has_next %}
+                        <a href="/pymovieshelf/?page={{ next }}" style="padding-left:10px">&gt;</a>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="footer">
+                    (c) Mike Stegeman, 2010
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
