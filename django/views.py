@@ -15,7 +15,7 @@ def add_imdb(request):
         i = imdb.IMDb()
         try:
             m = i.get_movie(request.POST['movie_id'])
-        except IMDbError:
+        except imdb.IMDbError:
             return render_to_response('pymovieshelf/add_imdb.html',
                     {'error': 'Failed to fetch movie info.',},
                     context_instance=RequestContext(request))
