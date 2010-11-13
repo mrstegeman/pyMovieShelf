@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!DOCTYPE html
-PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head profile="http://www.w3.org/2005/10/profile">
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <meta http-equiv="Content-language" content="en" />
-        <link rel="stylesheet" type="text/css" href="/media/css/pymovieshelf.css" />
+        <link rel="stylesheet" type="text/css" href="/media/css/pymovieshelf/pymovieshelf.css" />
         <meta name="description" content="Python based DVD manager." />
         <title>pyMovieShelf</title>
     </head>
@@ -24,7 +23,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 </div>
                 <div class="content">
                     <div class="imdb_search">
-                        <form name="search_form" action="/pymovieshelf/add_imdb/" method="post">
+                        <form action="/pymovieshelf/add_imdb/" method="post">
                             {% csrf_token %}
                             <fieldset>
                                 <label for="title">Title: </label>
