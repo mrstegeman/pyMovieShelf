@@ -5,6 +5,7 @@ pyMovieShelf is a Python/Django based DVD and Blu-ray collection manager. It all
 # Usage
 
 pyMovieShelf is intended to be an app added to an existing Django install. Django can be installed as described on the following two pages:
+
 * http://docs.djangoproject.com/en/dev/intro/install/
 * http://docs.djangoproject.com/en/dev/intro/tutorial01/
 
