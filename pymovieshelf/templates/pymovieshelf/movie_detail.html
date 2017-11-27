@@ -1,71 +1,70 @@
+<!doctype html>
 {% load static %}
-
-<?xml version="1.0" encoding="utf-8"?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head profile="http://www.w3.org/2005/10/profile">
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <meta http-equiv="Content-language" content="en" />
-        <link rel="stylesheet" type="text/css" href="{% static 'pymovieshelf/css/pymovieshelf.css' %}" />
-        <meta name="description" content="Python based DVD manager." />
-        <title>pyMovieShelf</title>
-    </head>
-    <body>
-        <div class="outer">
-            <div class="middle">
-                <div class="header">
-                    <h1>pyMovieShelf</h1>
-                    {% if user.is_authenticated %}
-                    <div class="userinfo"><a href="/admin/pymovieshelf/movie/" style="padding-right:20px">Admin</a><a href="/admin/logout/">Log out</a></div>
-                    {% else %}
-                    <div class="userinfo"><a href="/admin/">Log in</a></div>
-                    {% endif %}
-                </div>
-                <div class="content">
-                    <div class="poster">
-                        <img src="{{ object.img }}" width="200" height="auto" alt="{{ object.title }}" />
-                    </div>
-                    <div class="details">
-                        <h1>{{ object.title }}</h1>
-                        <table class="tbl_details" width="560px">
-                            <col width="100px" />
-                            <col width="460px" />
-                            <tr>
-                                <th>Year:</th>
-                                <td>{{ object.year }}</td>
-                            </tr>
-                            <tr>
-                                <th>Format:</th>
-                                <td>{{ object.fmt }}</td>
-                            </tr>
-                            <tr>
-                                <th>Genres:</th>
-                                <td>{{ object.genres }}</td>
-                            </tr>
-                            <tr>
-                                <th>Length:</th>
-                                <td>{{ object.length }} min</td>
-                            </tr>
-                            <tr>
-                                <th>Summary:</th>
-                                <td>{{ object.summary }}</td>
-                            </tr>
-                            <tr>
-                                <th>IMDb Page:</th>
-                                <td><a href="{{ object.url }}">{{ object.url }}</a></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="back">
-                        <a href="/pymovieshelf/">Movie List</a>
-                    </div>
-                </div>
-                <div class="footer">
-                    (c) Mike Stegeman, 2010
-                </div>
-            </div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'pymovieshelf/css/pymovieshelf.css' %}" />
+    <meta name="description" content="Python based DVD manager." />
+    <title>pyMovieShelf</title>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="middle">
+        <div class="header">
+          <span id="nav">
+            <a href="/pymovieshelf/">List</a>
+            <a href="/pymovieshelf/add_imdb/">Add</a>
+          </span>
+          <span id="userinfo">
+            {% if user.is_authenticated %}
+            <a href="/admin/pymovieshelf/movie/">Admin</a>
+            <a href="/admin/logout/">Log out</a>
+            {% else %}
+            <a href="/admin/">Log in</a>
+            {% endif %}
+          </span>
         </div>
-    </body>
+        <div class="content">
+          <div class="poster">
+            <img id="poster" src="{{ object.img }}" alt="{{ object.title }}" />
+          </div>
+          <div class="details">
+            <h1>{{ object.title }}</h1>
+            <table class="tbl_details">
+              <tr>
+                <th>Year:</th>
+                <td>{{ object.year }}</td>
+              </tr>
+              <tr>
+                <th>Format:</th>
+                <td>{{ object.fmt }}</td>
+              </tr>
+              <tr>
+                <th>Genres:</th>
+                <td>{{ object.genres }}</td>
+              </tr>
+              <tr>
+                <th>Length:</th>
+                <td>{{ object.length }} min</td>
+              </tr>
+              <tr>
+                <th>Summary:</th>
+                <td>{{ object.summary }}</td>
+              </tr>
+              <tr>
+                <th>IMDb Page:</th>
+                <td><a href="{{ object.url }}">{{ object.url }}</a></td>
+              </tr>
+            </table>
+          </div>
+          <div class="back">
+            <a href="/pymovieshelf/">Movie List</a>
+          </div>
+        </div>
+        <div class="footer">
+          &copy; Mike Stegeman, 2010 - 2017
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

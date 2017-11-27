@@ -1,89 +1,81 @@
+<!doctype html>
 {% load static %}
-
-<?xml version="1.0" encoding="utf-8"?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head profile="http://www.w3.org/2005/10/profile">
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <meta http-equiv="Content-language" content="en" />
-        <link rel="stylesheet" type="text/css" href="{% static 'pymovieshelf/css/pymovieshelf.css' %}" />
-        <meta name="description" content="Python based DVD manager." />
-        <title>pyMovieShelf</title>
-    </head>
-    <body onload="document.search_form.title.focus();">
-        <div class="outer">
-            <div class="middle">
-                <div class="header">
-                    <h1>pyMovieShelf</h1>
-                    {% if user.is_authenticated %}
-                    <div class="userinfo"><a href="/admin/pymovieshelf/movie/" style="padding-right:20px">Admin</a><a href="/admin/logout/">Log out</a></div>
-                    {% else %}
-                    <div class="userinfo"><a href="/admin/">Log in</a></div>
-                    {% endif %}
-                </div>
-                <div class="content">
-                    <div class="imdb_search">
-                        <form action="/pymovieshelf/add_imdb/" method="post">
-                            {% csrf_token %}
-                            <fieldset>
-                                <label for="title">Title: </label>
-                                <input type="text" name="title" id="title" />
-                                <input type="submit" value="Search" name="submit" />
-                            {% if movie_list %}
-                                <br />
-                                <br />
-                                <table class="movie_select" width="780px">
-                                {% for movie in movie_list %}
-                                    {% if forloop.counter0|divisibleby:2 %}
-                                    <tr>
-                                        <td class="td_left">
-                                        {% if forloop.counter0 == 0 %}
-                                            <input type="radio" name="movie_id" value="{{ movie.movieID }}" checked />
-                                        {% else %}
-                                            <input type="radio" name="movie_id" value="{{ movie.movieID }}" />
-                                        {% endif %}
-                                            <a href="http://www.imdb.com/title/tt{{ movie.movieID }}/">{{ movie.title }} ({{ movie.year }})</a>
-                                        </td>
-                                    {% else %}
-                                        <td class="td_right">
-                                            <a href="http://www.imdb.com/title/tt{{ movie.movieID }}/">{{ movie.title }} ({{ movie.year }})</a>
-                                            <input type="radio" name="movie_id" value="{{ movie.movieID }}" />
-                                        </td>
-                                    </tr>
-                                    {% endif %}
-                                {% endfor %}
-                                </table>
-                                <br />
-                                <input type="radio" name="format" value="DVD" checked />DVD
-                                <input type="radio" name="format" value="Blu-ray" />Blu-ray
-                                <input type="radio" name="format" value="Digital" />Digital
-                                <br />
-                                <br />
-                                <input type="submit" value="Select Movie" name="select" />
-                            {% else  %}{% if error %}
-                                <br />
-                                <br />
-                                <br />
-                                <span class="no_movies">{{ error }}</span>
-                            {% else %}
-                                <br />
-                                <br />
-                                <br />
-                                <span class="no_movies">No movies found.</span>
-                            {% endif %}{% endif %}
-                            </fieldset>
-                        </form>
-                    </div>
-                    <div class="back">
-                        <a href="/pymovieshelf/">Movie List</a>
-                    </div>
-                </div>
-                <div class="footer">
-                    (c) Mike Stegeman, 2010
-                </div>
-            </div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'pymovieshelf/css/pymovieshelf.css' %}" />
+    <meta name="description" content="Python based DVD manager." />
+    <title>pyMovieShelf</title>
+  </head>
+  <body onload="document.search_form.title.focus();">
+    <div class="outer">
+      <div class="middle">
+        <div class="header">
+          <span id="nav">
+            <a href="/pymovieshelf/">List</a>
+            <a href="/pymovieshelf/add_imdb/">Add</a>
+          </span>
+          <span id="userinfo">
+            {% if user.is_authenticated %}
+            <a href="/admin/pymovieshelf/movie/">Admin</a>
+            <a href="/admin/logout/">Log out</a>
+            {% else %}
+            <a href="/admin/">Log in</a>
+            {% endif %}
+          </span>
         </div>
-    </body>
+        <div class="content">
+          <div class="imdb_search">
+            <form action="/pymovieshelf/add_imdb/" method="post">
+              {% csrf_token %}
+              <fieldset>
+                <label for="title">Title: </label>
+                <input type="text" name="title" id="title" />
+                <input type="submit" value="Search IMDb" name="submit" />
+                {% if movie_list %}
+                <br />
+                <br />
+                <div id="search-results">
+                  {% for movie in movie_list %}
+                  {% if forloop.counter0 == 0 %}
+                  <input type="radio" name="movie_id" value="{{ movie.movieID }}" checked />
+                  {% else %}
+                  <input type="radio" name="movie_id" value="{{ movie.movieID }}" />
+                  {% endif %}
+                  <a href="http://www.imdb.com/title/tt{{ movie.movieID }}/">{{ movie.title }} ({{ movie.year }})</a>
+                  <br/>
+                  {% endfor %}
+                </div>
+                <br />
+                <label for="format">Format:</label>
+                <input type="radio" name="format" value="DVD" checked />DVD
+                <input type="radio" name="format" value="Blu-ray" />Blu-ray
+                <input type="radio" name="format" value="Digital" />Digital
+                <br />
+                <br />
+                <input type="submit" value="Select Movie" name="select" />
+                {% else  %}{% if error %}
+                <br />
+                <br />
+                <br />
+                <span class="no_movies">{{ error }}</span>
+                {% else %}
+                <br />
+                <br />
+                <br />
+                <span class="no_movies">No movies found.</span>
+                {% endif %}{% endif %}
+              </fieldset>
+            </form>
+          </div>
+          <div class="back">
+            <a href="/pymovieshelf/">Movie List</a>
+          </div>
+        </div>
+        <div class="footer">
+          &copy; Mike Stegeman, 2010 - 2017
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
